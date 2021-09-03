@@ -3,28 +3,33 @@ import { Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react';
 
 const UrlInput = () => {
 	const [urlAdress, setUrlAdress] = useState<string>('');
+	const [urls, setUrls] = useState<string[]>([]);
 	return (
-		<InputGroup size='md'>
+		<div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
 			<Input
+				value={urlAdress}
 				onChange={(event) => {
 					console.log(`event.target.value`, event.target.value);
 					setUrlAdress(event.target.value);
 				}}
 				placeholder={'youtube url'}
-				colorScheme={'twitter'}
+				colorScheme={'messenger'}
 			/>
-			<InputRightElement width='4.5rem'>
-				<Button
-					onClick={() => {}}
-					style={{
-						height: 38,
-						marginRight: 1,
-					}}
-				>
-					suggest
-				</Button>
-			</InputRightElement>
-		</InputGroup>
+			<Button
+				variant={'solid'}
+				colorScheme={'messenger'}
+				onClick={() => {
+					setUrls([...urls, urlAdress]);
+					setUrlAdress('');
+				}}
+				style={{
+					padding: '0px 20px',
+				}}
+				width={'fit-content'}
+			>
+				Add Suggestion
+			</Button>
+		</div>
 	);
 };
 
