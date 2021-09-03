@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 // import Protected from './pages/Protected/Protected';
-
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
 	return (
@@ -14,6 +14,7 @@ function App() {
 			<div style={{ padding: 20 }}>
 				<Router>
 					<Route exact path='/' component={Login} />
+					<Route component={NotFoundPage} />
 				</Router>
 			</div>
 		</ChakraProvider>
