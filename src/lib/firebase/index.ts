@@ -33,6 +33,7 @@ const signInWithGithub = async () => {
             // The signed-in user info.
             const user = result.user;
             console.log(`user`, user);
+            return user;
             // ...
         })
         .catch((error) => {
