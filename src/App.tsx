@@ -10,8 +10,10 @@ function App() {
         <ChakraProvider resetCSS={true}>
             <div style={{ padding: 20 }}>
                 <Router>
-                    <Route exact path='/' component={Login} />
-                    <Route component={NotFoundPage} />
+                    <Switch>
+                        <Route exact path='/' component={Login} />
+                        <Route component={NotFoundPage} />
+                    </Switch>
                 </Router>
             </div>
         </ChakraProvider>

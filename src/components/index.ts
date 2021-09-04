@@ -1,3 +1,4 @@
 import UrlInput from './UrlInput/UrlInput';
+import Brand from './Brand/Brand';
 
-export { UrlInput };
+export { UrlInput, Brand };
