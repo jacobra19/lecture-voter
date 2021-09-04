@@ -4,15 +4,18 @@ import './style.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import { Home, Login, NotFoundPage, Protected } from '@pages';
+import { LoginButton, SignupButton } from '@components';
 
 function App() {
     return (
         <ChakraProvider resetCSS={true}>
             <div style={{ padding: 20 }}>
-                <Router>
+                <LoginButton/>
+                <SignupButton/>
+                {/* <Router>
                     <Route exact path='/' component={Login} />
                     <Route component={NotFoundPage} />
-                </Router>
+                </Router> */}
             </div>
         </ChakraProvider>
     );
