@@ -1,25 +1,23 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
+import { UserCredential } from 'firebase/auth';
 
-const AuthContext = createContext({});
+interface IAuthContext {
+    userCredential: UserCredential | null;
+    setUserCredential: (user: UserCredential | null) => void;
+}
+
+export const AuthContext = createContext<IAuthContext | null>(null);
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = React.useState(null);
-
-    const login = (user: any) => {
-        setUser(user);
-    };
-
-    const logout = () => {
-        setUser(null);
-    };
+    const [userCredential, setUserCredential] = useState<UserCredential | null>(
+        null,
+    );
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ userCredential, setUserCredential }}>
             {children}
         </AuthContext.Provider>
     );
 };
-
-export const useAuth = () => useContext(AuthContext);
 
 export default AuthProvider;

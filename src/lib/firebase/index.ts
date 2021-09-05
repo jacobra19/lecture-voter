@@ -4,6 +4,8 @@ import {
     signOut,
     getAuth,
     signInWithPopup,
+    UserCredential as IUserCredential,
+    deleteUser
 } from 'firebase/auth';
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -24,28 +26,23 @@ const gitHubProvider = new GithubAuthProvider();
 const auth = getAuth();
 
 const signInWithGithub = async () => {
-    signInWithPopup(auth, gitHubProvider)
-        .then((result) => {
-            // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-            const credential = GithubAuthProvider.credentialFromResult(result);
-            const token = credential?.accessToken;
-
-            // The signed-in user info.
-            const user = result.user;
-            console.log(`user`, user);
-            return user;
-            // ...
-        })
-        .catch((error) => {
-            // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.email;
-            // The AuthCredential type that was used.
-            const credential = GithubAuthProvider.credentialFromError(error);
-            // ...
-        });
+    try {
+        const userCredential: IUserCredential = await signInWithPopup(
+            auth,
+            gitHubProvider,
+        );
+        const credential =
+            GithubAuthProvider.credentialFromResult(userCredential);
+        const token = credential?.accessToken;
+        return userCredential;
+    } catch (error: Error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+    }
 };
 
-export { app, gitHubProvider, auth, signInWithGithub };
+export { app, gitHubProvider, auth, signInWithGithub, signOut };

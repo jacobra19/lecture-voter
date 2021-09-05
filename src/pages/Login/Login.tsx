@@ -1,13 +1,31 @@
 import { Brand } from '@components';
 import React from 'react';
 import { Button } from '@chakra-ui/react';
-import { signInWithGithub, auth,gitHubProvider } from '../../lib/firebase';
-import { useAuth } from '../../contexts/AuthContext/AuthContext';
+import {
+    signInWithGithub,
+    gitHubProvider,
+    signOut,
+    auth,
+} from '../../lib/firebase';
+import useAuth from '../../hooks/useAuth/useAuth';
+import { deleteUser } from 'firebase/auth';
 
 const Login = () => {
     console.log('gitHubProvider :>> ', gitHubProvider);
-    const auth = useAuth()
-    console.log(`auth`, auth)
+    const { userCredential, setUserCredential } = useAuth();
+    console.log(`userCredential`, userCredential);
+
+    const handleSignIn = async () => {
+        const userCredential = await signInWithGithub();
+        console.log(`userCredential`, userCredential);
+        setUserCredential(userCredential);
+    };
+
+    const handleSignOut = async () => {
+        await deleteUser(userCredential.user);
+        setUserCredential(null);
+    };
+
     return (
         <div
             style={{
@@ -22,26 +40,8 @@ const Login = () => {
         >
             <Brand />
             <div>
-                <Button
-                    onClick={() => {
-                        signInWithGithub()
-                            .then((res) => {
-                                console.log(`res`, res);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    }}
-                >
-                    Login
-                </Button>
-                <Button
-                    onClick={() => {
-                        auth.signOut();
-                    }}
-                >
-                    Logout
-                </Button>
+                <Button onClick={handleSignIn}>Login</Button>
+                <Button onClick={handleSignOut}>Logout</Button>
             </div>
         </div>
     );
