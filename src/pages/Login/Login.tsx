@@ -1,8 +1,13 @@
 import { Brand } from '@components';
 import React from 'react';
 import { Button } from '@chakra-ui/react';
-import { signInWithGithub, auth } from '../../lib/firebase';
+import { signInWithGithub, auth,gitHubProvider } from '../../lib/firebase';
+import { useAuth } from '../../contexts/AuthContext/AuthContext';
+
 const Login = () => {
+    console.log('gitHubProvider :>> ', gitHubProvider);
+    const auth = useAuth()
+    console.log(`auth`, auth)
     return (
         <div
             style={{
@@ -17,27 +22,26 @@ const Login = () => {
         >
             <Brand />
             <div>
-            <Button
-                onClick={() => {
-                    signInWithGithub()
-                        .then((res) => {
-                            console.log(`res`, res);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                }}
-            >
-                Login
-            </Button>
-            <Button
-                onClick={() => {
-                    auth.signOut();
-                }}
-            >
-                Logout
-            </Button>
-
+                <Button
+                    onClick={() => {
+                        signInWithGithub()
+                            .then((res) => {
+                                console.log(`res`, res);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    }}
+                >
+                    Login
+                </Button>
+                <Button
+                    onClick={() => {
+                        auth.signOut();
+                    }}
+                >
+                    Logout
+                </Button>
             </div>
         </div>
     );
