@@ -1,6 +1,18 @@
 import React from 'react';
-import { Heading, Text } from '@chakra-ui/react';
-const Brand = () => {
+import { Heading, Kbd, Text } from '@chakra-ui/react';
+type Size = 'hero' | 'topbar';
+
+const Brand = ({ size = 'hero' }: { size: Size }) => {
+    const getSize = (size: Size, typography: 'heading' | 'text') => {
+        switch (size) {
+            case 'hero':
+                return typography === 'heading' ? '4xl' : 'large';
+
+            case 'topbar':
+                return typography === 'heading' ? '2xl' : 'small';
+        }
+    };
+
     return (
         <div
             style={{
@@ -10,7 +22,7 @@ const Brand = () => {
             }}
         >
             <Heading
-                size={'4xl'}
+                size={getSize(size, 'heading')}
                 style={{
                     fontFamily: 'Permanent Marker, cursive',
                 }}
@@ -19,7 +31,7 @@ const Brand = () => {
             </Heading>
             <div style={{ display: 'flex', whiteSpace: 'pre' }}>
                 <Text
-                    fontSize={'large'}
+                    fontSize={getSize(size, 'text')}
                     style={{
                         fontFamily: 'Permanent Marker, cursive',
                     }}
@@ -27,7 +39,7 @@ const Brand = () => {
                     by {''}
                 </Text>
                 <Text
-                    fontSize={'large'}
+                    fontSize={getSize(size, 'text')}
                     style={{
                         fontFamily: 'Consolas',
                         fontWeight: 'bold',
