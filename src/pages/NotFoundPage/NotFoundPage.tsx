@@ -1,9 +1,24 @@
+import { Heading } from '@chakra-ui/layout';
 import React from 'react';
 
 const NotFoundPage = () => {
     return (
-        <div>
-            <h1>404</h1>
+        <div
+            style={{
+                width: '100vw',
+                height: 'calc( 100vh - 100px )',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection:'column'
+            }}
+        >
+            <Heading size={'4xl'} fontFamily={'"Permanent Marker", cursive'}>
+                404
+            </Heading>
+            <Heading size={'2xl'} fontFamily={'"Permanent Marker", cursive'}>
+                page not found
+            </Heading>
         </div>
     );
 };
