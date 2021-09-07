@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { UserCredential } from 'firebase/auth';
 
 interface IAuthContext {
@@ -13,10 +13,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         null,
     );
 
+    useEffect(() => {
+        // console.log('AuthProvider useEffect userCredential', userCredential);
+    }, [userCredential]);
+
+    const value = {
+        userCredential,
+        setUserCredential,
+    };
+
     return (
-        <AuthContext.Provider value={{ userCredential, setUserCredential }}>
-            {children}
-        </AuthContext.Provider>
+        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );
 };
 
