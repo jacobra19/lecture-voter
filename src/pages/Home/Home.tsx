@@ -6,8 +6,8 @@ const Home = () => {
     const { user } = useAuth() as any;
     return (
         <div>
-            <h1>Home</h1>
-            <UrlInput />
+            {/* <h1>Home</h1> */}
+            {/* <UrlInput /> */}
         </div>
     );
 };
