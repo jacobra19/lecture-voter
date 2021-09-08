@@ -5,7 +5,8 @@ import {
     getAuth,
     signInWithPopup,
     UserCredential as IUserCredential,
-    deleteUser
+    browserLocalPersistence,
+    setPersistence,
 } from 'firebase/auth';
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -27,6 +28,7 @@ const auth = getAuth();
 
 const signInWithGithub = async () => {
     try {
+        await setPersistence(auth, browserLocalPersistence);
         const userCredential: IUserCredential = await signInWithPopup(
             auth,
             gitHubProvider,

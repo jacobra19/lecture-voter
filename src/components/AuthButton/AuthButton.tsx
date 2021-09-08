@@ -22,12 +22,14 @@ const AuthButton = () => {
         setUserCredential(null);
         setIsLoading(false);
     };
+    console.log(`userCredential`, userCredential)
     return (
         <div>
             {userCredential ? (
                 <Button onClick={handleSignOut} isLoading={isLoading}>
-                    Sign Out ({userCredential?._tokenResponse.displayName}/@
-                    {userCredential?._tokenResponse.screenName})
+                    Sign Out ({userCredential?.email}
+                    {/* /@
+                    {userCredential?._tokenResponse.screenName}) */}
                 </Button>
             ) : (
                 <Button

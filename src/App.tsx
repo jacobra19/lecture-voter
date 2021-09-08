@@ -10,19 +10,33 @@ import {
     useLocation,
 } from 'react-router-dom';
 
+import { auth } from './lib/firebase/index';
+
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
 import { Home, NotFoundPage } from '@pages';
 import useAuth from './hooks/useAuth/useAuth';
 import TopBar from './components/TopBar/TopBar';
 
 function App() {
-    const { user } = useAuth() as any;
+    const { userCredential, setUserCredential } = useAuth() as any;
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log('useEffect user :>> ', user);
+        console.log('useEffect userCredential :>> ', userCredential);
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('user :>> ', user);
+                setUserCredential(user);
+            } else {
+                console.log('user is null');
+            }
+        });
     }, []);
     return (
-        <div >
-            <TopBar/>
+        <div>
+            <TopBar />
             <Router>
                 <Switch>
                     <Route exact path='/' component={Home} />
