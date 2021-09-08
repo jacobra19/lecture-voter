@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Brand from '../Brand/Brand';
 import AuthButton from '../AuthButton/AuthButton';
+import AddLectureButton from '../AddLectureButton/AddLectureButton';
 
 const TopBar = () => {
     return (
@@ -16,7 +17,10 @@ const TopBar = () => {
             }}
         >
             <Brand size={'topbar'} />
-            <AuthButton />
+            <div style={{ display: 'flex', gap: 20 }}>
+                <AddLectureButton />
+                <AuthButton />
+            </div>
         </div>
     );
 };
