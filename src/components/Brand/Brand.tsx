@@ -43,6 +43,10 @@ const Brand = ({ size = 'hero' }: { size: Size }) => {
                     style={{
                         fontFamily: 'Consolas',
                         fontWeight: 'bold',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => {
+                        window.open('https://www.yakov.dev', '_blank');
                     }}
                 >
                     yakov.dev
