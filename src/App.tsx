@@ -39,12 +39,19 @@ function App() {
     return (
         <div>
             <TopBar />
-            <Router>
-                <Switch>
-                    <Route exact path='/' component={Home} />
-                    <Route component={NotFoundPage} />
-                </Switch>
-            </Router>
+            <div
+                style={{
+                    overflow: 'auto',
+                    height: 'calc( 100vh - 100px )',
+                }}
+            >
+                <Router>
+                    <Switch>
+                        <Route exact path='/' component={Home} />
+                        <Route component={NotFoundPage} />
+                    </Switch>
+                </Router>
+            </div>
         </div>
     );
 }
