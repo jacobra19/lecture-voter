@@ -3,12 +3,12 @@ import { Button } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
 import { signInWithGithub } from '../../lib/firebase';
-import useAuth from '../../hooks/useAuth/useAuth';
 import { deleteUser } from 'firebase/auth';
+import { useAppContext } from '../../contexts/AppContext/AppContext';
 
 const AuthButton = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const { userCredential, setUserCredential } = useAuth();
+    const { userCredential, setUserCredential } = useAppContext() as any;
     const handleSignIn = async () => {
         setIsLoading(true);
         const userCredential = await signInWithGithub();
@@ -22,7 +22,7 @@ const AuthButton = () => {
         setUserCredential(null);
         setIsLoading(false);
     };
-    console.log(`userCredential`, userCredential)
+    console.log(`userCredential`, userCredential);
     return (
         <div>
             {userCredential ? (

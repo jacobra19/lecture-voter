@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
-import AuthProvider from './contexts/AuthContext/AuthContext';
+import { AppContextProvider } from './contexts/AppContext/AppContext';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ChakraProvider resetCSS={true}>
-            <AuthProvider>
+        <AppContextProvider>
+            <ChakraProvider resetCSS={true}>
                 <App />
-            </AuthProvider>
-        </ChakraProvider>
+            </ChakraProvider>
+        </AppContextProvider>
     </React.StrictMode>,
     document.getElementById('root'),
 );
