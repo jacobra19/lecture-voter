@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
-import { signInWithGithub } from '../../lib/firebase';
+import { signInWithGithub,signOut,auth } from '../../lib/firebase';
 import { deleteUser } from 'firebase/auth';
 import { useAppContext } from '../../contexts/AppContext/AppContext';
 
@@ -18,7 +18,7 @@ const AuthButton = () => {
 
     const handleSignOut = async () => {
         setIsLoading(true);
-        await deleteUser(userCredential.user);
+        await signOut(auth);
         setUserCredential(null);
         setIsLoading(false);
     };
