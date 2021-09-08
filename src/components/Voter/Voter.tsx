@@ -10,7 +10,7 @@ interface IVoter {
 
 const Voter = ({ votes, style = {} }: IVoter) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { userCredential } = useAppContext();
+    const { userCredential } = useAppContext() as any;
     if(!userCredential) return null;
     const hasVoted = votes.includes(userCredential?.email);
     const handleVote = () => {

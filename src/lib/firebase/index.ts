@@ -37,7 +37,7 @@ const signInWithGithub = async () => {
             GithubAuthProvider.credentialFromResult(userCredential);
         const token = credential?.accessToken;
         return userCredential;
-    } catch (error: Error) {
+    } catch (error: any) {
         const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.

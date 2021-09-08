@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/layout';
 import React from 'react';
 import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
 
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import relateiveTime from 'dayjs/plugin/relativeTime';
 import Voter from '../Voter/Voter';
 import { Tooltip } from '@chakra-ui/tooltip';
