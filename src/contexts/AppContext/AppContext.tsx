@@ -1,20 +1,24 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { UserCredential } from 'firebase/auth';
+import { IDBLecture } from 'src/types';
 
-type ContextType = {
+export type AppContextType = {
     isAppLoading: boolean;
     setIsAppLoading: (isAppLoading: boolean) => void;
     userCredential: UserCredential | null;
     setUserCredential: (user: UserCredential | null) => void;
+    lectures: IDBLecture[];
+    setLectures: (lectures: IDBLecture[]) => void;
 };
 
-const AppContext = createContext<ContextType | null>(null);
+const AppContext = createContext<AppContextType | null>(null);
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAppLoading, setIsAppLoading] = useState(true);
     const [userCredential, setUserCredential] = useState<UserCredential | null>(
         null,
     );
+    const [lectures, setLectures] = useState<IDBLecture[]>([]);
 
     return (
         <AppContext.Provider
@@ -23,6 +27,8 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
                 setIsAppLoading,
                 userCredential,
                 setUserCredential,
+                lectures,
+                setLectures,
             }}
         >
             {children}
