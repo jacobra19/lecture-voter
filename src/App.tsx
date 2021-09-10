@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom';
 import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
-import { auth } from './lib/firebase/index';
+import { auth, getLectures } from './lib/firebase/index';
 
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
@@ -20,12 +20,18 @@ import TopBar from './components/TopBar/TopBar';
 import { useAppContext } from './contexts/AppContext/AppContext';
 
 function App() {
-    const { isAppLoading, setIsAppLoading, userCredential, setUserCredential } =
-        useAppContext() as any;
+    const {
+        isAppLoading,
+        setIsAppLoading,
+        userCredential,
+        setUserCredential,
+        lectures,
+        setLectures,
+    } = useAppContext() as any;
 
-    useEffect(() => {
-        console.log('useEffect userCredential :>> ', userCredential);
+    const loadInitialData = async (cb: () => void) => {
         const auth = getAuth();
+        const lectures = await getLectures();
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log('user :>> ', user);
@@ -33,6 +39,13 @@ function App() {
             } else {
                 console.log('user is null');
             }
+        });
+        setLectures(lectures);
+        cb();
+    };
+
+    useEffect(() => {
+        loadInitialData(() => {
             setIsAppLoading(false);
         });
     }, []);

@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { initializeApp } from 'firebase/app';
 import {
     GithubAuthProvider,
@@ -8,6 +9,9 @@ import {
     browserLocalPersistence,
     setPersistence,
 } from 'firebase/auth';
+
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { IDBLecture } from 'src/types';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -24,7 +28,22 @@ const app = initializeApp(firebaseConfig);
 
 const gitHubProvider = new GithubAuthProvider();
 
+const db = getFirestore();
+
 const auth = getAuth();
+
+const getLectures: () => Promise<IDBLecture[]> = async () => {
+    const querySnapshot = await getDocs(collection(db, 'lectures'));
+    const lectures = querySnapshot.docs.map((doc) => {
+        let docData = doc.data();
+        return {
+            ...docData,
+            addedOn: dayjs(docData.addedOn.toDate()).format(),
+            documentId: doc.id,
+        } as IDBLecture;
+    });
+    return lectures;
+};
 
 const signInWithGithub = async () => {
     try {
@@ -47,4 +66,4 @@ const signInWithGithub = async () => {
     }
 };
 
-export { app, gitHubProvider, auth, signInWithGithub, signOut };
+export { app, gitHubProvider, auth, signInWithGithub, signOut, getLectures };
