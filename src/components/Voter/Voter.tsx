@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 import { Button } from '@chakra-ui/button';
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { useAppContext } from '../../contexts/AppContext/AppContext';
-
+import { updateVote, getLectures } from '../../lib/firebase';
 interface IVoter {
     votes: string[];
     style?: React.CSSProperties;
+    onChange: () => void;
+    documentId: string;
+    email: string;
 }
 
-const Voter = ({ votes, style = {} }: IVoter) => {
+const Voter = ({ votes, style = {}, onChange, documentId, email }: IVoter) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { userCredential } = useAppContext() as any;
-    if(!userCredential) return null;
+    const { userCredential, setLectures } = useAppContext() as any;
+    if (!userCredential) return null;
     const hasVoted = votes.includes(userCredential?.email);
-    const handleVote = () => {
+    const handleVote = async () => {
         setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        await updateVote({ documentId, isVote: !hasVoted });
+        const lectures = await getLectures();
+        setLectures(lectures);
+        setIsLoading(false);
     };
     return (
         <div

@@ -7,24 +7,17 @@ import relateiveTime from 'dayjs/plugin/relativeTime';
 import Voter from '../Voter/Voter';
 import { Tooltip } from '@chakra-ui/tooltip';
 dayjs.extend(relateiveTime);
+import { IDBLecture } from '../../types';
 
-interface ILecture {
-    videoId: string;
-    addedBy: {
-        email: string;
-        displayName: string;
-        screenName: string;
-    };
-    addedOn: string;
-    votes: string[];
-}
-const LectureCard = (props: { lecture: ILecture }) => {
-    const { videoId, addedBy, addedOn, votes } = props.lecture;
+const LectureCard = (props: { lecture: IDBLecture }) => {
+    const { videoId, addedBy, addedOn, votes, documentId } = props.lecture;
+
+    const onVoteChange = () => {};
 
     const renderVotes = (votes: string[]) => {
         if (!votes.length) return null;
         return (
-            <div style={{padding:5}}>
+            <div style={{ padding: 5 }}>
                 {votes.map((vote, index) => {
                     return (
                         <Text fontSize='sm' key={vote}>
@@ -35,6 +28,7 @@ const LectureCard = (props: { lecture: ILecture }) => {
             </div>
         );
     };
+
     return (
         <div
             style={{
@@ -77,6 +71,8 @@ const LectureCard = (props: { lecture: ILecture }) => {
                 </Tooltip>
 
                 <Voter
+                    documentId={documentId}
+                    onChange={onVoteChange}
                     votes={votes}
                     style={{ gridColumn: `1 / 3`, alignSelf: 'self-end' }}
                 />

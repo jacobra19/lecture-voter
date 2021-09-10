@@ -16,6 +16,9 @@ import {
     getDocs,
     addDoc,
     Timestamp,
+    getDoc,
+    doc,
+    setDoc,
 } from 'firebase/firestore';
 
 import { IDBLecture } from 'src/types';
@@ -64,6 +67,41 @@ const addLecture = async ({ videoId }: { videoId: string }) => {
         votes: [auth.currentUser?.email],
     };
     await addDoc(collection(db, 'lectures'), data);
+};
+
+export const updateVote = async ({
+    documentId,
+    isVote,
+}: {
+    documentId: string;
+    isVote: boolean;
+}) => {
+    const docRef = doc(db, 'lectures', documentId);
+    const docSnap = await getDoc(docRef);
+    const docData = docSnap.data();
+
+    let votes = [...docData?.votes];
+    const hasVoted = votes.includes(auth.currentUser?.email);
+    if(hasVoted){
+        votes = votes.filter(vote => vote !== auth.currentUser?.email);
+    } else {
+        votes.push(auth.currentUser?.email);
+    }
+
+    await setDoc(docRef, {
+        ...docData,
+        votes,
+    });
+    // const docRef = doc(db, "lectures", documentId);
+
+    // docSnap.update({foo: "bar"})
+    // console.log(`docData`, docData)
+    // const querySnapshot = await getDocs(
+    //     collection(db, 'lectures').where('documentId', '==', documentId),
+    // );
+    // const lecture = querySnapshot.docs[0].data();
+    // const votes = isVote
+    // db.collection("users").doc(doc.id).update({foo: "bar"});
 };
 
 const signInWithGithub = async () => {
