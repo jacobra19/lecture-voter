@@ -10,7 +10,14 @@ import {
     setPersistence,
 } from 'firebase/auth';
 
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    Timestamp,
+} from 'firebase/firestore';
+
 import { IDBLecture } from 'src/types';
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -45,6 +52,20 @@ const getLectures: () => Promise<IDBLecture[]> = async () => {
     return lectures;
 };
 
+const addLecture = async ({ videoId }: { videoId: string }) => {
+    const data = {
+        videoId,
+        addedOn: Timestamp.now(),
+        addedBy: {
+            displayName: auth.currentUser?.displayName,
+            email: auth.currentUser?.email,
+            screenName: auth.currentUser?.reloadUserInfo?.screenName || '',
+        },
+        votes: [auth.currentUser?.email],
+    };
+    await addDoc(collection(db, 'lectures'), data);
+};
+
 const signInWithGithub = async () => {
     try {
         await setPersistence(auth, browserLocalPersistence);
@@ -66,4 +87,12 @@ const signInWithGithub = async () => {
     }
 };
 
-export { app, gitHubProvider, auth, signInWithGithub, signOut, getLectures };
+export {
+    app,
+    gitHubProvider,
+    auth,
+    signInWithGithub,
+    signOut,
+    getLectures,
+    addLecture,
+};

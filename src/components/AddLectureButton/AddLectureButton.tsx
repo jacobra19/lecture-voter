@@ -14,15 +14,25 @@ import {
 
 import { UrlInput } from '@components';
 import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
+import { addLecture, getLectures } from '../../lib/firebase';
+import { useAppContext } from '../../contexts/AppContext/AppContext';
 const AddLectureButton = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [url, setUrl] = useState('');
-
+    const { setLectures } = useAppContext() as any;
     const youtubeParser = (url: string) => {
         var regExp =
             /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         var match = url.match(regExp);
         return match && match[7].length == 11 ? match[7] : false;
+    };
+
+    const handleAddLecture = async () => {
+        await addLecture({ videoId: url });
+        let lectures = await getLectures();
+        setLectures(lectures)
+        onClose();
+        setUrl('');
     };
 
     return (
@@ -52,11 +62,11 @@ const AddLectureButton = () => {
                     <ModalFooter style={{ padding: '0px 24px 24px 24px' }}>
                         <Button
                             colorScheme='blue'
-                            onClick={onClose}
+                            onClick={handleAddLecture}
                             disabled={!url}
                             isFullWidth
                         >
-                            Save
+                            Add Lecture
                         </Button>
                     </ModalFooter>
                 </ModalContent>
