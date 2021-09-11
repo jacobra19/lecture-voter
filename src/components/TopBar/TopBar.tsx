@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import Brand from '../Brand/Brand';
 import AuthButton from '../AuthButton/AuthButton';
 import AddLectureButton from '../AddLectureButton/AddLectureButton';
+import { Skeleton } from '@chakra-ui/react';
+import { useAppContext } from '../../contexts/AppContext/AppContext';
 
 const TopBar = () => {
+    const { isAppLoading } = useAppContext() as any;
     return (
         <div
             style={{
@@ -16,11 +19,15 @@ const TopBar = () => {
                 borderBottom: '1px solid #ccc',
             }}
         >
-            <Brand size={'topbar'} />
-            <div style={{ display: 'flex', gap: 20 }}>
-                <AddLectureButton />
-                <AuthButton />
-            </div>
+            <Skeleton isLoaded={!isAppLoading}>
+                <Brand size={'topbar'} />
+            </Skeleton>
+            <Skeleton isLoaded={!isAppLoading}>
+                <div style={{ display: 'flex', gap: 20 }}>
+                    <AddLectureButton />
+                    <AuthButton />
+                </div>
+            </Skeleton>
         </div>
     );
 };
