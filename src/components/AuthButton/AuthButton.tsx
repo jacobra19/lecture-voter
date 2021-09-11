@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
-import { signInWithGithub,signOut,auth } from '../../lib/firebase';
-import { deleteUser } from 'firebase/auth';
+import { signInWithGithub, signOut, auth } from '../../lib/firebase';
 import { useAppContext } from '../../contexts/AppContext/AppContext';
 
 const AuthButton = () => {
@@ -22,14 +21,15 @@ const AuthButton = () => {
         setUserCredential(null);
         setIsLoading(false);
     };
-    console.log(`userCredential`, userCredential);
+    const signOutLabel = `Sign Out (${
+        userCredential?.email || userCredential?.user?.email || ''
+    })`;
+    const signInLabel = 'Sign In with GitHub';
     return (
         <div>
             {userCredential ? (
                 <Button onClick={handleSignOut} isLoading={isLoading}>
-                    Sign Out ({userCredential?.email}
-                    {/* /@
-                    {userCredential?._tokenResponse.screenName}) */}
+                    {signOutLabel}
                 </Button>
             ) : (
                 <Button
@@ -38,7 +38,7 @@ const AuthButton = () => {
                     isLoading={isLoading}
                 >
                     <FaGithub />
-                    Sign In with GitHub
+                    {signInLabel}
                 </Button>
             )}
         </div>
