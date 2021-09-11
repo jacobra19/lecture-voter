@@ -19,6 +19,7 @@ import { useAppContext } from '../../contexts/AppContext/AppContext';
 const AddLectureButton = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [url, setUrl] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const { setLectures } = useAppContext() as any;
     const youtubeParser = (url: string) => {
         var regExp =
@@ -28,11 +29,13 @@ const AddLectureButton = () => {
     };
 
     const handleAddLecture = async () => {
+        setIsLoading(true);
         await addLecture({ videoId: url });
-        let lectures = await getLectures();
-        setLectures(lectures)
         onClose();
         setUrl('');
+        let lectures = await getLectures();
+        setLectures(lectures);
+        setIsLoading(false);
     };
 
     return (
@@ -65,6 +68,7 @@ const AddLectureButton = () => {
                             onClick={handleAddLecture}
                             disabled={!url}
                             isFullWidth
+                            isLoading={isLoading}
                         >
                             Add Lecture
                         </Button>
