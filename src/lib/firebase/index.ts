@@ -67,7 +67,6 @@ const addLecture = async ({ videoId }: { videoId: string }) => {
         addedBy: {
             displayName: auth.currentUser?.displayName,
             email: auth.currentUser?.email,
-            screenName: auth.currentUser?.reloadUserInfo?.screenName || '',
         },
         votes: [auth.currentUser?.email],
     };

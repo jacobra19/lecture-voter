@@ -1,7 +1,6 @@
 export interface IUserDisplayData {
     email: string;
     displayName: string;
-    screenName: string;
 }
 
 export interface IDBLecture {
