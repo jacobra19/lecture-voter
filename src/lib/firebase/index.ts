@@ -19,6 +19,9 @@ import {
     getDoc,
     doc,
     setDoc,
+    orderBy,
+    query,
+    limit,
 } from 'firebase/firestore';
 
 import { IDBLecture } from 'src/types';
@@ -43,7 +46,9 @@ const db = getFirestore();
 const auth = getAuth();
 
 const getLectures: () => Promise<IDBLecture[]> = async () => {
-    const querySnapshot = await getDocs(collection(db, 'lectures'));
+    const lecturesRef = collection(db, 'lectures')
+    const q = query(lecturesRef, orderBy('addedOn', 'desc'))
+    const querySnapshot = await getDocs(q)
     const lectures = querySnapshot.docs.map((doc) => {
         let docData = doc.data();
         return {
