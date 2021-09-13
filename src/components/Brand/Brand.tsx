@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Kbd, Text } from '@chakra-ui/react';
+import { Heading, Text } from '@chakra-ui/react';
 type Size = 'hero' | 'topbar';
 
 const Brand = ({ size = 'hero' }: { size: Size }) => {

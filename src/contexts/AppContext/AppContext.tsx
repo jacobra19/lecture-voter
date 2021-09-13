@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { UserCredential } from 'firebase/auth';
-import { IDBLecture } from 'src/types';
+import { IDBLecture } from '@types';
 
 export type AppContextType = {
     isAppLoading: boolean;

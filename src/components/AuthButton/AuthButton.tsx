@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import { FaGithub } from 'react-icons/fa';
 
-import { signInWithGithub, signOut, auth } from '../../lib/firebase';
-import { useAppContext } from '../../contexts/AppContext/AppContext';
+import { signInWithGithub, signOut, auth } from '@lib';
+import { useAppContext } from '@contexts';
 
 const AuthButton = () => {
     const [isLoading, setIsLoading] = useState(false);

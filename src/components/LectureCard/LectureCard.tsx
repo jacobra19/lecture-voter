@@ -1,13 +1,12 @@
-import { Text } from '@chakra-ui/layout';
 import React from 'react';
-import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
-
+import { Tooltip, Text } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import relateiveTime from 'dayjs/plugin/relativeTime';
-import Voter from '../Voter/Voter';
-import { Tooltip } from '@chakra-ui/tooltip';
+
+import { YoutubeEmbed, Voter } from '@components';
+import { IDBLecture } from '@types';
+
 dayjs.extend(relateiveTime);
-import { IDBLecture } from '../../types';
 
 const LectureCard = (props: { lecture: IDBLecture }) => {
     const { videoId, addedBy, addedOn, votes, documentId } = props.lecture;

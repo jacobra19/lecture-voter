@@ -24,7 +24,7 @@ import {
     limit,
 } from 'firebase/firestore';
 
-import { IDBLecture } from 'src/types';
+import { IDBLecture } from '@types';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {

@@ -7,15 +7,13 @@ import {
     ModalBody,
     ModalFooter,
     ModalContent,
-    ModalHeader,
-    ModalCloseButton,
     Input,
 } from '@chakra-ui/react';
 
-import { UrlInput } from '@components';
-import YoutubeEmbed from '../YoutubeEmbed/YoutubeEmbed';
-import { addLecture, getLectures } from '../../lib/firebase';
-import { useAppContext } from '../../contexts/AppContext/AppContext';
+import { YoutubeEmbed } from '@components';
+import { addLecture, getLectures } from '@lib';
+import { useAppContext } from '@contexts';
+
 const AddLectureButton = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [url, setUrl] = useState('');
@@ -41,7 +39,6 @@ const AddLectureButton = () => {
     return (
         <>
             <Button onClick={onOpen}>ADD LECTURE</Button>
-
             <Modal
                 isOpen={isOpen}
                 onClose={() => {

@@ -1,33 +1,18 @@
-import React, { useState, useEffect, ContextType } from 'react';
 import './style.css';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation,
-} from 'react-router-dom';
-import { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react';
 
-import { auth, getLectures } from './lib/firebase/index';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // TODO: relocate to lib/firebase
 
+import { getLectures } from '@lib';
 import { Home, NotFoundPage } from '@pages';
-import TopBar from './components/TopBar/TopBar';
-import { useAppContext } from './contexts/AppContext/AppContext';
+import { TopBar } from '@components';
+import { useAppContext } from '@contexts';
 
 function App() {
-    const {
-        isAppLoading,
-        setIsAppLoading,
-        userCredential,
-        setUserCredential,
-        lectures,
-        setLectures,
-    } = useAppContext() as any;
+    const { setIsAppLoading, setUserCredential, setLectures } =
+        useAppContext() as any;
 
     const loadInitialData = async (cb: () => void) => {
         const auth = getAuth();

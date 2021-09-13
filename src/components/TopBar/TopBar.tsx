@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Brand from '../Brand/Brand';
-import AuthButton from '../AuthButton/AuthButton';
-import AddLectureButton from '../AddLectureButton/AddLectureButton';
 import { Skeleton } from '@chakra-ui/react';
-import { useAppContext } from '../../contexts/AppContext/AppContext';
+
+import { Brand, AuthButton, AddLectureButton } from '@components';
+import { useAppContext } from '@contexts';
 
 const TopBar = () => {
     const { isAppLoading } = useAppContext() as any;

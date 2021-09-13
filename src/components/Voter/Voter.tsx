@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Button } from '@chakra-ui/button';
+import { Button } from '@chakra-ui/react';
 import { FaRegThumbsUp } from 'react-icons/fa';
-import { useAppContext } from '../../contexts/AppContext/AppContext';
-import { updateVote, getLectures } from '../../lib/firebase';
+import { useAppContext } from '@contexts';
+import { updateVote, getLectures } from '@lib';
 interface IVoter {
     votes: string[];
     style?: React.CSSProperties;

@@ -1,8 +1,9 @@
 import { Spinner } from '@chakra-ui/react';
 import React from 'react';
-import { useAppContext } from '../../contexts/AppContext/AppContext';
-import LectureCard from '../../components/LectureCard/LectureCard';
-import { IDBLecture } from 'src/types';
+
+import { useAppContext } from '@contexts';
+import { LectureCard } from '@components';
+import { IDBLecture } from '@types';
 
 const Home = () => {
     const { lectures, isAppLoading } = useAppContext() as any;
