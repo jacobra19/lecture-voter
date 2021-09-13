@@ -19,6 +19,7 @@ const Brand = ({ size = 'hero' }: { size: Size }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'flex-end',
+                width: 'fit-content',
             }}
         >
             <Heading
