@@ -11,4 +11,4 @@ dist-ssr
 storybook-static
 
 # cypress
-cypress.env.json
+*.env.json

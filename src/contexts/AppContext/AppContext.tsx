@@ -20,11 +20,15 @@ const AppContext = createContext<AppContextType>({
     setLectures: () => {},
 });
 
-const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
+const AppContextProvider = ({
+    children,
+    overrideValue = {},
+}: {
+    children: React.ReactNode;
+    overrideValue?: object;
+}) => {
     const [isAppLoading, setIsAppLoading] = useState(true);
-    const [user, setUser] = useState<User | null>(
-        null,
-    );
+    const [user, setUser] = useState<User | null>(null);
     const [lectures, setLectures] = useState<IDBLecture[]>([]);
 
     return (
@@ -36,6 +40,7 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
                 setUser,
                 lectures,
                 setLectures,
+                ...overrideValue,
             }}
         >
             {children}
