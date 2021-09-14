@@ -2,8 +2,13 @@ node_modules
 .DS_Store
 dist
 dist-ssr
-storybook-static
 *.local
 
 .env*
 *.log
+
+# storybook
+storybook-static
+
+# cypress
+cypress.env.json
