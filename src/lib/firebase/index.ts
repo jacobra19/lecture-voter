@@ -118,7 +118,7 @@ const signInWithGithub = async () => {
         const credential =
             GithubAuthProvider.credentialFromResult(userCredential);
         const token = credential?.accessToken;
-        return userCredential;
+        return userCredential.user;
     } catch (error: any) {
         const errorCode = error.code;
         const errorMessage = error.message;

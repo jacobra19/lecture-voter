@@ -1,21 +1,28 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { UserCredential } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { IDBLecture } from '@types';
 
 export type AppContextType = {
     isAppLoading: boolean;
     setIsAppLoading: (isAppLoading: boolean) => void;
-    userCredential: UserCredential | null;
-    setUserCredential: (user: UserCredential | null) => void;
+    user: User | null;
+    setUser: (user: User | null) => void;
     lectures: IDBLecture[];
     setLectures: (lectures: IDBLecture[]) => void;
 };
 
-const AppContext = createContext<AppContextType | null>(null);
+const AppContext = createContext<AppContextType>({
+    isAppLoading: true,
+    setIsAppLoading: () => {},
+    user: null,
+    setUser: () => {},
+    lectures: [],
+    setLectures: () => {},
+});
 
 const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAppLoading, setIsAppLoading] = useState(true);
-    const [userCredential, setUserCredential] = useState<UserCredential | null>(
+    const [user, setUser] = useState<User | null>(
         null,
     );
     const [lectures, setLectures] = useState<IDBLecture[]>([]);
@@ -25,8 +32,8 @@ const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
             value={{
                 isAppLoading,
                 setIsAppLoading,
-                userCredential,
-                setUserCredential,
+                user,
+                setUser,
                 lectures,
                 setLectures,
             }}

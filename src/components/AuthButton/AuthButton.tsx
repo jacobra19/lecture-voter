@@ -7,27 +7,27 @@ import { useAppContext } from '@contexts';
 
 const AuthButton = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const { userCredential, setUserCredential } = useAppContext() as any;
+    const { user, setUser } = useAppContext();
     const handleSignIn = async () => {
         setIsLoading(true);
-        const userCredential = await signInWithGithub();
-        setUserCredential(userCredential);
+        try {
+            const user = await signInWithGithub();
+            setUser(user || null);
+        } catch (error) {}
         setIsLoading(false);
     };
 
     const handleSignOut = async () => {
         setIsLoading(true);
         await signOut(auth);
-        setUserCredential(null);
+        setUser(null);
         setIsLoading(false);
     };
-    const signOutLabel = `Sign Out (${
-        userCredential?.email || userCredential?.user?.email || ''
-    })`;
+    const signOutLabel = `Sign Out (${user?.email || ''})`;
     const signInLabel = 'Sign In with GitHub';
     return (
         <div>
-            {userCredential ? (
+            {user ? (
                 <Button onClick={handleSignOut} isLoading={isLoading}>
                     {signOutLabel}
                 </Button>

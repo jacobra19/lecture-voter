@@ -6,7 +6,7 @@ import { LectureCard } from '@components';
 import { IDBLecture } from '@types';
 
 const Home = () => {
-    const { lectures, isAppLoading } = useAppContext() as any;
+    const { lectures, isAppLoading } = useAppContext();
     return (
         <div
             style={{

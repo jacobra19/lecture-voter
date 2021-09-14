@@ -5,7 +5,7 @@ import { Brand, AuthButton, AddLectureButton } from '@components';
 import { useAppContext } from '@contexts';
 
 const TopBar = () => {
-    const { isAppLoading } = useAppContext() as any;
+    const { isAppLoading } = useAppContext();
     return (
         <div
             style={{
