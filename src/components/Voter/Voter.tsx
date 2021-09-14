@@ -12,11 +12,10 @@ interface IVoter {
 
 const Voter = ({ votes, style = {}, onChange, documentId }: IVoter) => {
     const [isLoading, setIsLoading] = useState(false);
-    const { userCredential, setLectures } = useAppContext() as any;
-    if (!userCredential) return null;
-    const hasVoted =
-        votes.includes(userCredential?.email) ||
-        votes.includes(userCredential?.user?.email);
+    const { user, setLectures } = useAppContext();
+    if (!user) return null;
+    const { email } = user;
+    const hasVoted = votes.includes(email || '');
     const handleVote = async () => {
         setIsLoading(true);
         await updateVote({ documentId, isVote: !hasVoted });

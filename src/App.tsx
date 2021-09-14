@@ -11,8 +11,8 @@ import { TopBar } from '@components';
 import { useAppContext } from '@contexts';
 
 function App() {
-    const { setIsAppLoading, setUserCredential, setLectures } =
-        useAppContext() as any;
+    const { setIsAppLoading, setUser, setLectures } =
+        useAppContext();
 
     const loadInitialData = async (cb: () => void) => {
         const auth = getAuth();
@@ -20,7 +20,7 @@ function App() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log('user :>> ', user);
-                setUserCredential(user);
+                setUser(user);
             } else {
                 console.log('user is null');
             }

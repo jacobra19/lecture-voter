@@ -18,7 +18,7 @@ const AddLectureButton = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [url, setUrl] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const { setLectures } = useAppContext() as any;
+    const { setLectures } = useAppContext();
     const youtubeParser = (url: string) => {
         var regExp =
             /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
