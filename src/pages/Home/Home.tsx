@@ -10,11 +10,6 @@ const Home = () => {
     return (
         <div
             style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 20,
                 padding: 20,
             }}
         >
@@ -30,9 +25,19 @@ const Home = () => {
                     <Spinner size={'xl'} />
                 </div>
             ) : (
-                lectures.map((lecture: IDBLecture) => (
-                    <LectureCard key={lecture.documentId} lecture={lecture} />
-                ))
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 20,
+                    }}
+                >
+                    {lectures.map((lecture: IDBLecture) => (
+                        <LectureCard key={lecture.documentId} lecture={lecture} />
+                    ))}
+                </div>
             )}
         </div>
     );
