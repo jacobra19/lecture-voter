@@ -33,17 +33,17 @@ const db = getFirestore();
 
 const auth = getAuth();
 
-const getLectures: () => Promise<IDBLecture[]> = async () => {
-    const lecturesRef = collection(db, 'lectures')
-    const q = query(lecturesRef, orderBy('addedOn', 'desc'))
-    const querySnapshot = await getDocs(q)
+const getLectures = async () => {
+    const lecturesRef = collection(db, 'lectures');
+    const q = query(lecturesRef, orderBy('votesCount', 'desc'), orderBy('addedOn', 'desc'));
+    const querySnapshot = await getDocs(q);
     const lectures = querySnapshot.docs.map((doc) => {
         let docData = doc.data();
         return {
             ...docData,
             addedOn: dayjs(docData.addedOn.toDate()).format(),
             documentId: doc.id,
-        } as IDBLecture;
+        };
     });
     return lectures;
 };
