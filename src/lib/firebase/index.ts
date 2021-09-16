@@ -10,19 +10,7 @@ import {
     setPersistence,
 } from 'firebase/auth';
 
-import {
-    getFirestore,
-    collection,
-    getDocs,
-    addDoc,
-    Timestamp,
-    getDoc,
-    doc,
-    setDoc,
-    orderBy,
-    query,
-    limit,
-} from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, Timestamp, getDoc, doc, setDoc, orderBy, query, limit } from 'firebase/firestore';
 
 import { IDBLecture } from '@types';
 
@@ -73,21 +61,15 @@ const addLecture = async ({ videoId }: { videoId: string }) => {
     await addDoc(collection(db, 'lectures'), data);
 };
 
-export const updateVote = async ({
-    documentId,
-    isVote,
-}: {
-    documentId: string;
-    isVote: boolean;
-}) => {
+export const updateVote = async ({ documentId }: { documentId: string }) => {
     const docRef = doc(db, 'lectures', documentId);
     const docSnap = await getDoc(docRef);
     const docData = docSnap.data();
 
     let votes = [...docData?.votes];
     const hasVoted = votes.includes(auth.currentUser?.email);
-    if(hasVoted){
-        votes = votes.filter(vote => vote !== auth.currentUser?.email);
+    if (hasVoted) {
+        votes = votes.filter((vote) => vote !== auth.currentUser?.email);
     } else {
         votes.push(auth.currentUser?.email);
     }
@@ -95,28 +77,15 @@ export const updateVote = async ({
     await setDoc(docRef, {
         ...docData,
         votes,
+        votesCount: votes.length,
     });
-    // const docRef = doc(db, "lectures", documentId);
-
-    // docSnap.update({foo: "bar"})
-    // console.log(`docData`, docData)
-    // const querySnapshot = await getDocs(
-    //     collection(db, 'lectures').where('documentId', '==', documentId),
-    // );
-    // const lecture = querySnapshot.docs[0].data();
-    // const votes = isVote
-    // db.collection("users").doc(doc.id).update({foo: "bar"});
 };
 
 const signInWithGithub = async () => {
     try {
         await setPersistence(auth, browserLocalPersistence);
-        const userCredential: IUserCredential = await signInWithPopup(
-            auth,
-            gitHubProvider,
-        );
-        const credential =
-            GithubAuthProvider.credentialFromResult(userCredential);
+        const userCredential: IUserCredential = await signInWithPopup(auth, gitHubProvider);
+        const credential = GithubAuthProvider.credentialFromResult(userCredential);
         const token = credential?.accessToken;
         return userCredential.user;
     } catch (error: any) {
@@ -129,12 +98,4 @@ const signInWithGithub = async () => {
     }
 };
 
-export {
-    app,
-    gitHubProvider,
-    auth,
-    signInWithGithub,
-    signOut,
-    getLectures,
-    addLecture,
-};
+export { app, gitHubProvider, auth, signInWithGithub, signOut, getLectures, addLecture };

@@ -18,7 +18,7 @@ const Voter = ({ votes, style = {}, onChange, documentId }: IVoter) => {
     const hasVoted = votes.includes(email || '');
     const handleVote = async () => {
         setIsLoading(true);
-        await updateVote({ documentId, isVote: !hasVoted });
+        await updateVote({ documentId });
         const lectures = await getLectures();
         setLectures(lectures);
         setIsLoading(false);

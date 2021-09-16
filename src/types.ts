@@ -8,5 +8,6 @@ export interface IDBLecture {
     addedBy: IUserDisplayData;
     addedOn: string;
     votes: string[];
+    votesCount: number;
     documentId: string;
 }
