@@ -2,7 +2,7 @@ import { Spinner } from '@chakra-ui/react';
 import React from 'react';
 
 import { useAppContext } from '@contexts';
-import { LectureCard } from '@components';
+import { LectureCard, LecturesFeed } from '@components';
 import { IDBLecture } from '@types';
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
             {isAppLoading ? (
                 <div
                     style={{
-                        height: 'calc( 100vw - 140px )',
+                        height: 'calc( 100vh - 140px )',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -25,19 +25,7 @@ const Home = () => {
                     <Spinner size={'xl'} />
                 </div>
             ) : (
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: 20,
-                    }}
-                >
-                    {lectures.map((lecture: IDBLecture) => (
-                        <LectureCard key={lecture.documentId} lecture={lecture} />
-                    ))}
-                </div>
+                <LecturesFeed lectures={lectures} />
             )}
         </div>
     );

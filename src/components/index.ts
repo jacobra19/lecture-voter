@@ -5,6 +5,7 @@ import LectureCard from './LectureCard/LectureCard';
 import TopBar from './TopBar/TopBar';
 import Voter from './Voter/Voter';
 import YoutubeEmbed from './YoutubeEmbed/YoutubeEmbed';
+import LecturesFeed from './LecturesFeed/LecturesFeed'
 
 export {
     AddLectureButton,
@@ -14,4 +15,5 @@ export {
     TopBar,
     Voter,
     YoutubeEmbed,
+    LecturesFeed,
 };
