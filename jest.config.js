@@ -22,6 +22,7 @@ module.exports = {
             },
         ],
     },
+    testPathIgnorePatterns: ['.spec.*'],
     verbose: true,
     extensionsToTreatAsEsm: ['.jsx', '.tsx', '.ts'],
     testEnvironment: 'jsdom',
