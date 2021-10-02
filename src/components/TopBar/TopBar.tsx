@@ -5,7 +5,7 @@ import { Brand, AuthButton, AddLectureButton } from '@components';
 import { useAppContext } from '@contexts';
 
 const TopBar = () => {
-    const { isAppLoading } = useAppContext();
+    const { isAppLoading, user } = useAppContext();
     return (
         <div
             style={{
@@ -23,7 +23,7 @@ const TopBar = () => {
             </Skeleton>
             <Skeleton isLoaded={!isAppLoading}>
                 <div style={{ display: 'flex', gap: 20 }}>
-                    <AddLectureButton />
+                    {user && <AddLectureButton />}
                     <AuthButton />
                 </div>
             </Skeleton>
