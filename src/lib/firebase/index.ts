@@ -57,6 +57,7 @@ const addLecture = async ({ videoId }: { videoId: string }) => {
             email: auth.currentUser?.email,
         },
         votes: [auth.currentUser?.email],
+        votesCount: 1,
     };
     await addDoc(collection(db, 'lectures'), data);
 };
