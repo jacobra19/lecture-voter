@@ -9,10 +9,10 @@ import { getLectures } from '@lib';
 import { Home, NotFoundPage } from '@pages';
 import { TopBar } from '@components';
 import { useAppContext } from '@contexts';
+import { IDBLecture } from '@types';
 
 function App() {
-    const { setIsAppLoading, setUser, setLectures } =
-        useAppContext();
+    const { setIsAppLoading, setUser, setLectures } = useAppContext();
 
     const loadInitialData = async (cb: () => void) => {
         const auth = getAuth();
@@ -40,7 +40,7 @@ function App() {
             <div
                 style={{
                     overflow: 'auto',
-                    height: 'calc( 100vh - 100px )',
+                    height: 'calc( 100vh - 101px )',
                 }}
             >
                 <Router>
