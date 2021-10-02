@@ -20,8 +20,7 @@ const AddLectureButton = () => {
     const [isLoading, setIsLoading] = useState(false);
     const { setLectures } = useAppContext();
     const youtubeParser = (url: string) => {
-        var regExp =
-            /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         var match = url.match(regExp);
         return match && match[7].length == 11 ? match[7] : false;
     };
@@ -58,15 +57,8 @@ const AddLectureButton = () => {
                         />
                         {url && <YoutubeEmbed videoId={url} width={400} />}
                     </ModalBody>
-
                     <ModalFooter style={{ padding: '0px 24px 24px 24px' }}>
-                        <Button
-                            colorScheme='blue'
-                            onClick={handleAddLecture}
-                            disabled={!url}
-                            isFullWidth
-                            isLoading={isLoading}
-                        >
+                        <Button colorScheme='blue' onClick={handleAddLecture} disabled={!url} isFullWidth isLoading={isLoading}>
                             Add Lecture
                         </Button>
                     </ModalFooter>

@@ -1,16 +1,18 @@
 import React from 'react';
-import { Tooltip, Text } from '@chakra-ui/react';
+import { Tooltip, Text, Button } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import relateiveTime from 'dayjs/plugin/relativeTime';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
 
-import { YoutubeEmbed, Voter } from '@components';
+import { YoutubeEmbed, VoteButton, DeleteButton } from '@components';
 import { IDBLecture } from '@types';
+import { useAppContext } from '@contexts';
 
 dayjs.extend(relateiveTime);
 
 const LectureCard = (props: { lecture: IDBLecture }) => {
     const { videoId, addedBy, addedOn, votes, documentId } = props.lecture;
-
+    const { user } = useAppContext();
     const onVoteChange = () => {};
 
     const renderVotes = (votes: string[]) => {
@@ -52,8 +54,7 @@ const LectureCard = (props: { lecture: IDBLecture }) => {
 
                 <Text fontWeight={'semibold'}>Date Added:</Text>
                 <Text>
-                    {dayjs(addedOn).format('DD/MM/YY')} (
-                    {dayjs(addedOn).fromNow()})
+                    {dayjs(addedOn).format('DD/MM/YY')} ({dayjs(addedOn).fromNow()})
                 </Text>
 
                 <Text fontWeight={'semibold'}>Voters ({votes.length}):</Text>
@@ -68,13 +69,10 @@ const LectureCard = (props: { lecture: IDBLecture }) => {
                         {votes.join(', ')}
                     </Text>
                 </Tooltip>
-
-                <Voter
-                    documentId={documentId}
-                    onChange={onVoteChange}
-                    votes={votes}
-                    style={{ gridColumn: `1 / 3`, alignSelf: 'self-end' }}
-                />
+                <div style={{ gridColumn: `1 / 3`, alignSelf: 'self-end', display: 'flex', gap: 10 }}>
+                    {addedBy?.email === user?.email && <DeleteButton documentId={documentId} style={{ flex: 1 }} />}
+                    <VoteButton documentId={documentId} onChange={onVoteChange} votes={votes} style={{ flex: 1 }} />
+                </div>
             </div>
         </div>
     );

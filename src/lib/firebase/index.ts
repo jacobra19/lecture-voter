@@ -10,7 +10,20 @@ import {
     setPersistence,
 } from 'firebase/auth';
 
-import { getFirestore, collection, getDocs, addDoc, Timestamp, getDoc, doc, setDoc, orderBy, query, limit } from 'firebase/firestore';
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    Timestamp,
+    getDoc,
+    doc,
+    setDoc,
+    orderBy,
+    query,
+    limit,
+    deleteDoc,
+} from 'firebase/firestore';
 
 import { IDBLecture } from '@types';
 
@@ -62,7 +75,7 @@ const addLecture = async ({ videoId }: { videoId: string }) => {
     await addDoc(collection(db, 'lectures'), data);
 };
 
-export const updateVote = async ({ documentId }: { documentId: string }) => {
+const updateVote = async ({ documentId }: { documentId: string }) => {
     const docRef = doc(db, 'lectures', documentId);
     const docSnap = await getDoc(docRef);
     const docData = docSnap.data();
@@ -82,6 +95,11 @@ export const updateVote = async ({ documentId }: { documentId: string }) => {
     });
 };
 
+const deleteLecture = async ({ documentId }: { documentId: string }) => {
+    const docRef = doc(db, 'lectures', documentId);
+    await deleteDoc(docRef);
+};
+
 const signInWithGithub = async () => {
     try {
         await setPersistence(auth, browserLocalPersistence);
@@ -99,4 +117,4 @@ const signInWithGithub = async () => {
     }
 };
 
-export { app, gitHubProvider, auth, signInWithGithub, signOut, getLectures, addLecture };
+export { app, gitHubProvider, auth, signInWithGithub, signOut, getLectures, addLecture, deleteLecture, updateVote };

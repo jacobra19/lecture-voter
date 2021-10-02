@@ -7,6 +7,7 @@ import {
     signInWithGithub,
     signOut,
     updateVote,
+    deleteLecture,
 } from './firebase';
 
 export {
@@ -18,4 +19,5 @@ export {
     signInWithGithub,
     signOut,
     updateVote,
+    deleteLecture,
 };
