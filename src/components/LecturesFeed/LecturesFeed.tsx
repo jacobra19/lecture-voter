@@ -3,8 +3,6 @@ import React from 'react';
 import { LectureCard } from '@components';
 import { IDBLecture } from '@types';
 
-
-
 const LecturesFeed = ({ lectures }: { lectures: IDBLecture[] }) => {
     return (
         <div

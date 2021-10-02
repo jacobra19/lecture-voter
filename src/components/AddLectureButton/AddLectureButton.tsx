@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-    useDisclosure,
-    Button,
-    Modal,
-    ModalOverlay,
-    ModalBody,
-    ModalFooter,
-    ModalContent,
-    Input,
-} from '@chakra-ui/react';
+import { useDisclosure, Button, Modal, ModalOverlay, ModalBody, ModalFooter, ModalContent, Input } from '@chakra-ui/react';
 
 import { YoutubeEmbed } from '@components';
 import { addLecture, getLectures } from '@lib';

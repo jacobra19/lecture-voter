@@ -10,7 +10,7 @@ const NotFoundPage = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection:'column'
+                flexDirection: 'column',
             }}
         >
             <Heading size={'4xl'} fontFamily={'"Permanent Marker", cursive'}>

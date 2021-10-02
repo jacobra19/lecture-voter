@@ -32,11 +32,7 @@ const AuthButton = () => {
                     {signOutLabel}
                 </Button>
             ) : (
-                <Button
-                    style={{ display: 'flex', gap: 10 }}
-                    onClick={handleSignIn}
-                    isLoading={isLoading}
-                >
+                <Button style={{ display: 'flex', gap: 10 }} onClick={handleSignIn} isLoading={isLoading}>
                     <FaGithub />
                     {signInLabel}
                 </Button>

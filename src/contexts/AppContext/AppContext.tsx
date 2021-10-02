@@ -20,13 +20,7 @@ const AppContext = createContext<AppContextType>({
     setLectures: () => {},
 });
 
-const AppContextProvider = ({
-    children,
-    overrideValue = {},
-}: {
-    children: React.ReactNode;
-    overrideValue?: object;
-}) => {
+const AppContextProvider = ({ children, overrideValue = {} }: { children: React.ReactNode; overrideValue?: object }) => {
     const [isAppLoading, setIsAppLoading] = useState(true);
     const [user, setUser] = useState<User | null>(null);
     const [lectures, setLectures] = useState<IDBLecture[]>([]);

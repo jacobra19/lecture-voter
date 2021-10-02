@@ -1,9 +1,6 @@
 module.exports = {
     modulePaths: ['<rootDir>'],
-    moduleDirectories: [
-        'node_modules',
-        'src',
-    ],
+    moduleDirectories: ['node_modules', 'src'],
     moduleNameMapper: {
         '^@components$': '<rootDir>/src/components',
         '^@pages$': '<rootDir>/src/pages',
