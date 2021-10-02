@@ -3,6 +3,7 @@ import { Button } from '@chakra-ui/react';
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { useAppContext } from '@contexts';
 import { updateVote, getLectures } from '@lib';
+
 interface IVoter {
     votes: string[];
     style?: React.CSSProperties;
@@ -10,7 +11,7 @@ interface IVoter {
     documentId: string;
 }
 
-const Voter = ({ votes, style = {}, onChange, documentId }: IVoter) => {
+const VoteButton = ({ votes, style = {}, onChange, documentId }: IVoter) => {
     const [isLoading, setIsLoading] = useState(false);
     const { user, setLectures } = useAppContext();
     if (!user) return null;
@@ -36,6 +37,7 @@ const Voter = ({ votes, style = {}, onChange, documentId }: IVoter) => {
                 isLoading={isLoading}
                 onClick={handleVote}
                 size={'xs'}
+                colorScheme={hasVoted ? 'green' : 'blue'}
             >
                 {hasVoted ? 'UNVOTE' : 'VOTE'}
             </Button>
@@ -43,4 +45,4 @@ const Voter = ({ votes, style = {}, onChange, documentId }: IVoter) => {
     );
 };
 
-export default Voter;
+export default VoteButton;
